@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Proef</title>
+    </head>
+    <body>
+        <form>
+            <input id="t"> <br>
+            <input id="k"> <br>
+            <button onclick="vraag()"> bereken</button>
+        </form>
+        <script>
+            function vraag(){
+                let tot = document.getElementById('t').value;
+                let kort = document.getElementById('k').value;
+                alert('Het nieuwe bedrag is ' + (tot - ((kort/100) * tot)));
+            }
+        </script>
+    </body>
+</html>
