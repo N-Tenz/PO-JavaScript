@@ -1,20 +1,43 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Proef</title>
+        <link rel="stylesheet" type="text/css" href="01.css">
+        <title>Notes</title>
     </head>
     <body>
-        <form>
-            <input id="t"> <br>
-            <input id="k"> <br>
-            <button onclick="vraag()"> bereken</button>
-        </form>
-        <script>
-            function vraag(){
-                let tot = document.getElementById('t').value;
-                let kort = document.getElementById('k').value;
-                alert('Het nieuwe bedrag is ' + (tot - ((kort/100) * tot)));
-            }
-        </script>
+        <div id="kop">
+        </div>
+        <!--de pagina-->
+        <div id="wrapper">
+            <h1>Notes</h1>
+            <!--notitie mappen deel-->
+            <div id="map">
+                <h1>Vakken</h1>
+                <p id="vakkenlijst"></p>
+                <button onclick= del()>-</button>
+                <button onclick= add()>+</button>
+                <script>
+                    const vakken = ["net", "du"]
+                    
+                    function del(){
+                        vakken.splice(idx,1);
+                    }
+                    function add(){
+                        let vak = prompt('Nieuw vak');
+                        vakken.push(vak);
+                    }
+                    vakken.sort();
+                    document.getElementById('vakkenlijst').innerHTML = vakken;
+                </script>
+            </div>
+            <!--plaats voor notities-->
+            <div id="notes">
+                <h1>Notitie</h1>
+                <script>
+                </script>
+            </div>
+        </div>
+        <div id="footer">
+        </div>
     </body>
 </html>
