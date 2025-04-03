@@ -5,39 +5,42 @@
         <title>Notes</title>
     </head>
     <body>
-        <div id="kop">
-        </div>
-        <!--de pagina-->
-        <div id="wrapper">
-            <h1>Notes</h1>
+        <div class="pag">
+            <header>
+                <h1>Notes</h1>
+            </header>
+            <!--de pagina-->
+            <aside id="a1"></aside>
             <!--notitie mappen deel-->
-            <div id="map">
+            <div class="map">
                 <h1>Vakken</h1>
                 <p id="vakkenlijst"></p>
                 <button onclick= del()>-</button>
                 <button onclick= add()>+</button>
                 <script>
                     const vakken = ["net", "du"]
-                    
+                
                     function del(){
                         vakken.splice(idx,1);
                     }
                     function add(){
                         let vak = prompt('Nieuw vak');
                         vakken.push(vak);
-                    }
+                        }
                     vakken.sort();
                     document.getElementById('vakkenlijst').innerHTML = vakken;
                 </script>
             </div>
             <!--plaats voor notities-->
-            <div id="notes">
+            <div class="notes">
                 <h1>Notitie</h1>
                 <script>
                 </script>
             </div>
-        </div>
-        <div id="footer">
+            <aside id="a2">
+            </aside>
+            <footer>
+            </footer>
         </div>
     </body>
 </html>

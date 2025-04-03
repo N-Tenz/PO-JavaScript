@@ -1,20 +1,56 @@
 body {
     background-color: white;
 }
-#wrapper {
+.pag{
+    display: grid;
+    grid-template-areas: 
+    "aside1 kop kop aside2" 
+    "aside1 map notes aside2" 
+    "aside1 foot foot aside2";
+    grid-template-columns: 50px 150px 600px 50px;
+    grid-template-rows: 100px 400px 100px;
+    column-gap: 50px;
+    row-gap: 0px;
+    width:auto;
+    height: 800px;
+}
+.pag > #a1 {
+    grid-area: aside1;
+    grid-row: 1/ span 3;
+    height: 800px;
+    width: 50px;
+    background-color: red;
+}
+.pag > #a2 {
+    grid-area: aside2;
+    grid-row: 1/ span 3;
+    height: 800px;
+    width: 50px;
+    background-color: red;
+}
+.pag > header{
+    grid-area: kop;
+    grid-column: 1/ span 2;
     width: 800px;
-    height: 500px;
+    height: 75px;
+    position: absolute;
+    background-color: blue;
+    margin-bottom: 10px;
 }
-#wrapper h1{
-    font-family:'Times New Roman', Times, serif;
-}
-#map {
+.pag > div.map {
+    grid-area: map;
     height: 400px;
     width: 200px;
-    float: left;
 }
-#notes {
+.pag > div.notes {
+    grid-area: notes;
     height: 400px;
     width: 600px;
-    float: right;
+}
+.pag > footer{
+    grid-area: foot;
+    grid-column: 1/ span 2;
+    width: auto;
+    height: 100px;
+    background-color: blue;
 }
