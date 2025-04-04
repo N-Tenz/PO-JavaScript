@@ -1,5 +1,5 @@
 body {
-    background-color: white;
+    background-color: #c4d0ff;
 }
 .pag{
     display: grid;
@@ -7,50 +7,70 @@ body {
     "aside1 kop kop aside2" 
     "aside1 map notes aside2" 
     "aside1 foot foot aside2";
-    grid-template-columns: 50px 150px 600px 50px;
-    grid-template-rows: 100px 400px 100px;
-    column-gap: 50px;
+    grid-template-columns: 10% 20% 60% 10%;
+    grid-template-rows: 10% 80% 10%;
     row-gap: 0px;
-    width:auto;
-    height: 800px;
+    height: 100vh;
 }
 .pag > #a1 {
     grid-area: aside1;
     grid-row: 1/ span 3;
-    height: 800px;
-    width: 50px;
-    background-color: red;
+    height: auto;
+    width: auto;
+    background-color: #c4d0ff;
 }
 .pag > #a2 {
     grid-area: aside2;
     grid-row: 1/ span 3;
-    height: 800px;
-    width: 50px;
-    background-color: red;
+    height: auto;
+    width: auto;
+    background-color: #c4d0ff;
 }
 .pag > header{
     grid-area: kop;
-    grid-column: 1/ span 2;
-    width: 800px;
-    height: 75px;
-    position: absolute;
-    background-color: blue;
-    margin-bottom: 10px;
+    grid-column: 2 /span 2;
+    width: auto;
+    height: auto;
+    border-radius: 60px;
+    padding-left: 25px;
+    padding-right: 25px;
+    background-color: #90a1df;
+}
+header h1{
+    float: left;
+}
+header button{
+    float: right;
+    border: none;
+    margin-top: 21px;
+    background-color: transparent;
 }
 .pag > div.map {
     grid-area: map;
-    height: 400px;
-    width: 200px;
+    height: auto;
+    width: auto;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 60px;
+    background-color:#90a1df ;
 }
 .pag > div.notes {
     grid-area: notes;
-    height: 400px;
-    width: 600px;
+    height: auto;
+    width: auto;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 60px;
+    background-color:#90a1df ;
 }
 .pag > footer{
     grid-area: foot;
-    grid-column: 1/ span 2;
+    grid-column: 2 /span 2;
     width: auto;
-    height: 100px;
-    background-color: blue;
+    height: auto;
+    border-radius: 60px;
+    background-color: #90a1df;
+}
+#vakkenlijst {
+    font-size: 25px;
 }

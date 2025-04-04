@@ -2,12 +2,14 @@
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="01.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <title>Notes</title>
     </head>
     <body>
         <div class="pag">
             <header>
                 <h1>Notes</h1>
+                <button><i class="material-icons" style="font-size:35px" >settings</i></button>
             </header>
             <!--de pagina-->
             <aside id="a1"></aside>
@@ -18,8 +20,7 @@
                 <button onclick= del()>-</button>
                 <button onclick= add()>+</button>
                 <script>
-                    const vakken = ["net", "du"]
-                
+                    const vakken = ["net", "du"]                
                     function del(){
                         vakken.splice(idx,1);
                     }
