@@ -1,17 +1,49 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <!--Link naar css-->
         <link rel="stylesheet" type="text/css" href="01.css">
+        <!--Link voor icons-->
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <!--website title-->
         <title>Notes</title>
     </head>
     <body>
+        <!--Div waar de pagina content in zit-->
         <div class="pag">
             <header>
                 <h1>Notes</h1>
-                <button><i class="material-icons" style="font-size:35px" >settings</i></button>
+                <!--settings button icon van de link
+                onclick functie uitvoeren
+                size aan pas voor de groote-->
+                <button id="set"  onclick="open_s()"><i class="material-icons" style="font-size:35px" >settings</i></button>
+                <!--div voor setting window met id en class
+                id voor de functie
+                class voor de css-->
+                <div id="settings" class="setting">
+                    <!--div voor de content in de settings window-->
+                    <div class="setting-content">
+                        <!--x icon / onclick voer functie uit-->
+                        <button id="close" onclick="close_s()"><i class="material-icons" style="font-size:35px">close</i></button>
+                        <h2>Settings</h2>
+                        <p> content </p>
+                    </div>
+                </div>
+                <script>
+                    //maak variable van settings window door id te pakken
+                    let settings = document.getElementById("settings")
+                    /*functie verandert display van none naar block
+                    settings window verschijnt*/
+                    function open_s(){
+                        settings.style.display = "block";
+                    }
+                    //display van block naar none
+                    function close_s(){
+                        settings.style.display = "none";
+                    }
+                </script>
             </header>
-            <!--de pagina-->
+            <!--leeg zijkant deel-->
             <aside id="a1"></aside>
             <!--notitie mappen deel-->
             <div class="map">
@@ -38,9 +70,11 @@
                 <script>
                 </script>
             </div>
+            <!--leeg zijkant deel-->
             <aside id="a2">
             </aside>
             <footer>
+                <p>© Copyright 2024 Norbu Tenzin</p>
             </footer>
         </div>
     </body>
