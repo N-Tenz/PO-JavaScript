@@ -1,7 +1,5 @@
-body {
+body{
     background-color: #c4d0ff;
-}
-.pag{
     display: grid;
     grid-template-areas: 
     "aside1 kop kop aside2" 
@@ -12,21 +10,21 @@ body {
     row-gap: 0px;
     height: 100vh;
 }
-.pag > #a1 {
+#a1 {
     grid-area: aside1;
     grid-row: 1/ span 3;
     height: auto;
     width: auto;
     background-color: #c4d0ff;
 }
-.pag > #a2 {
+#a2 {
     grid-area: aside2;
     grid-row: 1/ span 3;
     height: auto;
     width: auto;
     background-color: #c4d0ff;
 }
-.pag > header{
+header{
     grid-area: kop;
     grid-column: 2 /span 2;
     width: auto;
@@ -68,13 +66,30 @@ header button:hover{
 .setting-content h2,p{
 margin: 0px 0px 0px 20px;
 }
-.setting-content #close{
+#close{
     float: right;
     border: none;
     background-color: transparent;
 }
-
-.pag > div.map {
+#blue{
+    border: 2px solid;
+    background-color: blue;
+    width: 50px;
+    height: 50px;
+}
+#red{
+    border: 2px solid;
+    background-color: red;
+    width: 50px;
+    height: 50px;
+}
+#grey{
+    border: 2px solid;
+    background-color: grey;
+    width: 50px;
+    height: 50px;
+}
+.map {
     grid-area: map;
     height: auto;
     width: auto;
@@ -83,7 +98,7 @@ margin: 0px 0px 0px 20px;
     border-radius: 60px;
     background-color:#90a1df ;
 }
-.pag > div.notes {
+.notes {
     grid-area: notes;
     height: auto;
     width: auto;
@@ -92,7 +107,7 @@ margin: 0px 0px 0px 20px;
     border-radius: 60px;
     background-color:#90a1df ;
 }
-.pag > footer{
+footer{
     grid-area: foot;
     grid-column: 2 /span 2;
     width: auto;
