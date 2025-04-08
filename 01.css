@@ -10,6 +10,9 @@ body{
     row-gap: 0px;
     height: 100vh;
 }
+button:hover{
+    cursor: pointer;
+}
 #a1 {
     grid-area: aside1;
     grid-row: 1/ span 3;
@@ -43,8 +46,8 @@ header #set{
     margin-top: 21px;
     background-color: transparent;
 }
-header button:hover{
-    cursor: pointer;
+header #set:hover{
+    color: white;
 }
 .setting{
     display: none;
@@ -95,8 +98,11 @@ margin: 0px 0px 0px 20px;
     width: auto;
     margin: 10px;
     padding: 10px;
-    border-radius: 60px;
+    border-radius: 30px;
     background-color:#90a1df ;
+}
+#vakkenlijst {
+    font-size: 25px;
 }
 .notes {
     grid-area: notes;
@@ -104,7 +110,7 @@ margin: 0px 0px 0px 20px;
     width: auto;
     margin: 10px;
     padding: 10px;
-    border-radius: 60px;
+    border-radius: 30px;
     background-color:#90a1df ;
 }
 footer{
@@ -114,12 +120,18 @@ footer{
     height: auto;
     border-radius: 60px;
     background-color: #90a1df;
-}
-#vakkenlijst {
-    font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 footer p{
     font-size: 15px;
-    margin-top: 20px;
-    margin-left: 15px;
+}
+footer a{
+    margin-right: 20px;
+    text-decoration: none;
+    color: black;
+}
+footer a:hover{
+    color: white;
 }

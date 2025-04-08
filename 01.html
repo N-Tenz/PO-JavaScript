@@ -3,8 +3,9 @@
     <head>
         <!--Link naar css-->
         <link rel="stylesheet" type="text/css" href="01.css">
-        <!--Link voor icons-->
+        <!--Link voor icons--><!--https://www.w3schools.com/icons/icons_reference.asp-->
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <!--website title-->
         <title>Notes</title>
     </head>
@@ -13,106 +14,113 @@
         <aside id="a1"></aside>
         <!--leeg zijkant deel-->
         <aside id="a2"></aside>
-            <header>
-                <h1>Notes</h1>
-                <!--settings button icon van de link
-                onclick functie uitvoeren
-                size aan pas voor de groote-->
-                <button id="set"  onclick="open_s()"><i class="material-icons" style="font-size:35px" >settings</i></button>
-                <!--div voor setting window-->
-                <div class="setting">
-                    <!--div voor de content in de settings window-->
-                    <div class="setting-content">
-                        <!--x icon / onclick voer functie uit-->
-                        <button id="close" onclick="close_s()"><i class="material-icons" style="font-size:35px">close</i></button>
-                        <h2>Settings</h2> <br>
-                        <p> Backgroundcolor:</p><br>
-                        <P><button id="blue" onclick="blue()">blue</button> 
-                            <button id="red" onclick="red()">red</button> 
-                            <button id="grey" onclick="grey()">grey</button></P>
-                    </div>
+        <header>
+            <h1>Notes</h1>
+            <!--settings button icon van de link
+            onclick functie uitvoeren-->
+            <button id="set"  onclick="open_s()"><i class="material-icons" style="font-size:35px" >settings</i></button>
+            <!--div voor setting window-->
+            <div class="setting">
+                <!--div voor de content in de settings window-->
+                <div class="setting-content">
+                    <!--x icon / onclick voer functie uit-->
+                    <button id="close" onclick="close_s()"><i class="material-icons" style="font-size:35px">close</i></button>
+                    <h2>Settings</h2> <br>
+                    <p> Backgroundcolor:</p><br>
+                    <!--Drie knoppen-->
+                    <P><button id="blue" onclick="blue()">blue</button> 
+                        <button id="red" onclick="red()">red</button> 
+                        <button id="grey" onclick="grey()">grey</button></P>
                 </div>
-                <script>
-                    //maak variable van settings window door id te pakken
-                    let settings = document.querySelector(".setting");
-                    /*functie verandert display van none naar block
-                    settings window verschijnt*/
-                    function open_s(){
-                        settings.style.display = "block";
-                    }
-                    //display van block naar none
-                    function close_s(){
-                        settings.style.display = "none";
-                    }
-                </script>
-            </header>
-            <!--notitie mappen deel-->
-            <div class="map">
-                <h1>Vakken</h1>
-                <p id="vakkenlijst"></p>
-                <button onclick= del()>-</button>
-                <button onclick= add()>+</button>
-                <script>
-                    const vakken = ["net", "du"]                
-                    function del(){
-                        vakken.splice(idx,1);
-                    }
-                    function add(){
-                        let vak = prompt('Nieuw vak');
-                        vakken.push(vak);
-                        }
-                    vakken.sort();
-                    document.getElementById('vakkenlijst').innerHTML = vakken;
-                </script>
             </div>
-            <!--plaats voor notities-->
-            <div class="notes">
-                <h1>Notitie</h1>
-                <script>
-                </script>
-            </div>
-            <footer>
-                <p>© Copyright 2024 Norbu Tenzin</p>
-            </footer>
             <script>
-                let body = document.querySelector("body");
-                let aside1 = document.getElementById("a1");
-                let aside2 = document.getElementById("a2");
-                let header = document.querySelector("header");
-                let map = document.querySelector(".map");
-                let notes = document.querySelector(".notes");
-                let footer = document.querySelector("footer");
-                let setting = document.querySelector(".setting");
-                function blue(){
-                    body.style.backgroundColor = "#c4d0ff";
-                    aside1.style.backgroundColor = "#c4d0ff";
-                    aside2.style.backgroundColor = "#c4d0ff";
-                    header.style.backgroundColor = "#90a1df";
-                    map.style.backgroundColor = "#90a1df";
-                    notes.style.backgroundColor = "#90a1df";
-                    footer.style.backgroundColor = "#90a1df";
-                    setting.style.backgroundColor = "#d9e1ff"
+                //maak variable van settings window door id te pakken
+                let settings = document.querySelector(".setting");
+                /*functie verandert display van none naar block
+                settings window verschijnt*/
+                function open_s(){
+                    settings.style.display = "block";
                 }
-                function red(){
-                    body.style.backgroundColor = "#ffc2c2";
-                    aside1.style.backgroundColor = "#ffc2c2";
-                    aside2.style.backgroundColor = "#ffc2c2";
-                    header.style.backgroundColor = "#ff9898";
-                    map.style.backgroundColor = "#ff9898";
-                    notes.style.backgroundColor = "#ff9898";
-                    footer.style.backgroundColor = "#ff9898";
-                    setting.style.backgroundColor = "#ffdede";
-                }
-                function grey(){
-                    body.style.backgroundColor = "#a2a7a1";
-                    aside1.style.backgroundColor = "#a2a7a1";
-                    aside2.style.backgroundColor = "#a2a7a1";
-                    header.style.backgroundColor = "#c6c9c6";
-                    map.style.backgroundColor = "#c6c9c6";
-                    notes.style.backgroundColor = "#c6c9c6";
-                    footer.style.backgroundColor = "#c6c9c6";
-                    setting.style.backgroundColor = "#e3e4e3";
+                //display van block naar none
+                function close_s(){
+                    settings.style.display = "none";
                 }
             </script>
+        </header>
+        <!--notitie mappen deel-->
+        <div class="map">
+            <h2>Vakken</h2>
+            <p id="vakkenlijst"></p>
+            <button onclick= del()>-</button>
+            <button onclick= add()>+</button>
+            <script>
+                const vakken = ["net", "du"]                
+                function del(){
+                    vakken.splice(idx,1);
+                }
+                function add(){
+                    let vak = prompt('Nieuw vak');
+                    vakken.push(vak);
+                    }
+                vakken.sort();
+                document.getElementById('vakkenlijst').innerHTML = vakken;
+            </script>
+        </div>
+        <!--plaats voor notities-->
+        <div class="notes">
+            <h2>Notitie</h2>
+            <script>
+            </script>
+        </div>
+        <footer>
+            <div><p>© Copyright 2025 Norbu Tenzin</p></div>
+            <div><a href="https://github.com/N-Tenz/PO-JavaScript" style="font-size:25px;"><i class="fa fa-github"></i></a></div>
+        </footer>
+        <script>
+            //Variabelen aanmaken
+            //queryselector voor classes en elementen
+            //getElementById voor ids
+            let body = document.querySelector("body");
+            let aside1 = document.getElementById("a1");
+            let aside2 = document.getElementById("a2");
+            let header = document.querySelector("header");
+            let map = document.querySelector(".map");
+            let notes = document.querySelector(".notes");
+            let footer = document.querySelector("footer");
+            let setting = document.querySelector(".setting");
+            //functie verander de backgroundcolor naar blauw
+            function blue(){
+                body.style.backgroundColor = "#c4d0ff";
+                aside1.style.backgroundColor = "#c4d0ff";
+                aside2.style.backgroundColor = "#c4d0ff";
+                header.style.backgroundColor = "#90a1df";
+                map.style.backgroundColor = "#90a1df";
+                notes.style.backgroundColor = "#90a1df";
+                footer.style.backgroundColor = "#90a1df";
+                setting.style.backgroundColor = "#d9e1ff"
+            }
+            //functie verander de backgroundcolor naar rood
+            function red(){
+                body.style.backgroundColor = "#ffc2c2";
+                aside1.style.backgroundColor = "#ffc2c2";
+                aside2.style.backgroundColor = "#ffc2c2";
+                header.style.backgroundColor = "#ff9898";
+                map.style.backgroundColor = "#ff9898";
+                notes.style.backgroundColor = "#ff9898";
+                footer.style.backgroundColor = "#ff9898";
+                setting.style.backgroundColor = "#ffdede";
+            }
+            //functie verander de backgroundcolor naar grijs
+            function grey(){
+                body.style.backgroundColor = "#a2a7a1";
+                aside1.style.backgroundColor = "#a2a7a1";
+                aside2.style.backgroundColor = "#a2a7a1";
+                header.style.backgroundColor = "#c6c9c6";
+                map.style.backgroundColor = "#c6c9c6";
+                notes.style.backgroundColor = "#c6c9c6";
+                footer.style.backgroundColor = "#c6c9c6";
+                setting.style.backgroundColor = "#e3e4e3";
+            }
+        </script>
     </body>
 </html>
