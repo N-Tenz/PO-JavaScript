@@ -48,26 +48,19 @@
             </header>
             <!--notitie mappen deel-->
             <div class="map">
-                <h1>Vakken</h1>
-                <p id="vakkenlijst"></p>
-                <button onclick= del()>-</button>
-                <button onclick= add()>+</button>
-                <script>
-                    const vakken = ["net", "du"]                
-                    function del(){
-                        vakken.splice(idx,1);
-                    }
-                    function add(){
-                        let vak = prompt('Nieuw vak');
-                        vakken.push(vak);
-                        }
-                    vakken.sort();
-                    document.getElementById('vakkenlijst').innerHTML = vakken;
-                </script>
+                <div><h1>Vakken</h1>
+                    <div id="vakkenlijst">
+                        <div id="vakkenlijst-items">
+                            <div id="vakkenlijst-klein-title"></div>
+                        </div>
+                    </div>
+                </div>
+                <div><button id="addbtn">Add</button></div>
             </div>
             <!--plaats voor notities-->
             <div class="notes">
-                <h1>Notitie</h1>
+                <input class="text_title" type="text" placeholder="Title...">
+                <textarea class="text" type="text">text area</textarea>
                 <script>
                 </script>
             </div>
@@ -113,6 +106,41 @@
                     footer.style.backgroundColor = "#c6c9c6";
                     setting.style.backgroundColor = "#e3e4e3";
                 }
+
+                //local storage
+                // links: https://dev.to/stevealila/3-typical-ways-to-store-data-using-javascript-1m1f https://www.w3schools.com/jsref/prop_win_localstorage.asp and https://www.w3schools.com/html/html5_webstorage.asp
+                //store data
+                //localStorage.setItem(key,value)
+                //remove data
+                //localStorage.removeItem(key)
+                //retrieve earlier stored data
+                //localStorage.getItem(key)
+                localStorage.setItem("vak","Duits")
+                function getData(){
+                    let vak
+                    if (localStorage.getItem("vak") === null){
+                        vak = []
+                    }
+                    else{
+                        vak = JSON.parse(localStorage.getItem("vak"))
+                    }
+                }
+                //laat vak zien in console
+                console.log(localStorage.getItem("vak"))
+
+                // pseudo script
+                // maak meerdere keys voor iedere vak
+                //de notitie word de value
+                //<input class="text_title" word key
+                //<textarea class="text" word value
+                //meerdere keys dus vakken
+                //value zijn de notities
+                //<button id="addbtn" add button word de localstorage.setItem
+                //<div id="vakkenlijst"> titels van de vakken in de lijst
+                //<div id="vakkenlijst-items"> 
+                //<div id="vakkenlijst-klein-title">Titel titel van een vak gebruik localStorage.getItem
+                document.getElementById("vakkenlijst-klein-title").innerHTML = document.querySelector("text_title")
+
             </script>
     </body>
 </html>
