@@ -14,113 +14,240 @@
         <aside id="a1"></aside>
         <!--leeg zijkant deel-->
         <aside id="a2"></aside>
-        <header>
-            <h1>Notes</h1>
-            <!--settings button icon van de link
-            onclick functie uitvoeren-->
-            <button id="set"  onclick="open_s()"><i class="material-icons" style="font-size:35px" >settings</i></button>
-            <!--div voor setting window-->
+            <header>
+                <h1>Notes</h1>
+                <!--settings button-->
+                <button id="set"  onclick="open_s()"><i class="material-icons" style="font-size:35px" >settings</i></button>
+            </header>
             <div class="setting">
                 <!--div voor de content in de settings window-->
                 <div class="setting-content">
-                    <!--x icon / onclick voer functie uit-->
+                    <!--x icon-->
                     <button id="close" onclick="close_s()"><i class="material-icons" style="font-size:35px">close</i></button>
                     <h2>Settings</h2> <br>
                     <p> Backgroundcolor:</p><br>
-                    <!--Drie knoppen-->
+                    <!--background-color functies-->
                     <P><button id="blue" onclick="blue()">blue</button> 
                         <button id="red" onclick="red()">red</button> 
                         <button id="grey" onclick="grey()">grey</button></P>
                 </div>
             </div>
+            <!--notitie mappen deel-->
+            <div class="map">
+                <div><h1>Vakken</h1>
+                    <div id="vakkenlijst">
+                        <div id="vakkenlijst-items">    
+                        </div>
+                    </div>
+                </div>
+                <!--add note button-->
+                <div style="margin-left:auto; margin-right:auto;"><button id="addbtn" onclick="open_n()" >Add Vak</button></div>
+            </div>
+            <!--popup bij add note-->
+            <div class="popup_note">
+                <h2 style="float: left;">New Vak</h2>
+                <button id="close_n" onclick="close_n()" ><i class="material-icons" style="font-size:35px">close</i></button><br>
+                <input id="newnote" type="text" placeholder="Vak...">
+                <button id="newnotebtn" onclick="addVak()">Add</button>
+            </div>
+            <!--plaats voor notities-->
+            <div class="notes">
+                <input class="text_title" id="texttitle" type="text" placeholder="Title...">
+                <textarea class="text" id="text" type="text" placeholder="text..."></textarea>
+            </div>
+            <footer>
+                <div><p>© Copyright 2024 Norbu Tenzin</p></div>
+                <div><a href="https://github.com/N-Tenz/PO-JavaScript" style="font-size:25px;"><i class="fa fa-github"></i></a></div>
+            </footer>
             <script>
-                //maak variable van settings window door id te pakken
+                //maak variable van settings window
                 let settings = document.querySelector(".setting");
-                /*functie verandert display van none naar block
-                settings window verschijnt*/
-                function open_s(){
-                    settings.style.display = "block";
-                }
-                //display van block naar none
-                function close_s(){
-                    settings.style.display = "none";
-                }
-            </script>
-        </header>
-        <!--notitie mappen deel-->
-        <div class="map">
-            <h2>Vakken</h2>
-            <p id="vakkenlijst"></p>
-            <button onclick= del()>-</button>
-            <button onclick= add()>+</button>
-            <script>
-                const vakken = ["net", "du"]                
-                function del(){
-                    vakken.splice(idx,1);
-                }
-                function add(){
-                    let vak = prompt('Nieuw vak');
-                    vakken.push(vak);
+                    /*functie verandert display van none naar block
+                    settings window verschijnt*/
+                    function open_s(){
+                        settings.style.display = "block";
                     }
-                vakken.sort();
-                document.getElementById('vakkenlijst').innerHTML = vakken;
+                    //display van block naar none
+                    function close_s(){
+                        settings.style.display = "none";
+                    }
+                //variabelen
+                let body = document.querySelector("body");
+                let aside1 = document.getElementById("a1");
+                let aside2 = document.getElementById("a2");
+                let header = document.querySelector("header");
+                let map = document.querySelector(".map");
+                let notes = document.querySelector(".notes");
+                let footer = document.querySelector("footer");
+                // functie maakt background color blauw
+                function blue(){
+                    body.style.backgroundColor = "#c4d0ff";
+                    aside1.style.backgroundColor = "#c4d0ff";
+                    aside2.style.backgroundColor = "#c4d0ff";
+                    header.style.backgroundColor = "#90a1df";
+                    map.style.backgroundColor = "#90a1df";
+                    notes.style.backgroundColor = "#90a1df";
+                    footer.style.backgroundColor = "#90a1df";
+                    settings.style.backgroundColor = "#d9e1ff"
+                }
+                // functie maakt background color rood
+                function red(){
+                    body.style.backgroundColor = "#ffc2c2";
+                    aside1.style.backgroundColor = "#ffc2c2";
+                    aside2.style.backgroundColor = "#ffc2c2";
+                    header.style.backgroundColor = "#ff9898";
+                    map.style.backgroundColor = "#ff9898";
+                    notes.style.backgroundColor = "#ff9898";
+                    footer.style.backgroundColor = "#ff9898";
+                    settings.style.backgroundColor = "#ffdede";
+                }
+                // functie maakt background color grijs
+                function grey(){
+                    body.style.backgroundColor = "#a2a7a1";
+                    aside1.style.backgroundColor = "#a2a7a1";
+                    aside2.style.backgroundColor = "#a2a7a1";
+                    header.style.backgroundColor = "#c6c9c6";
+                    map.style.backgroundColor = "#c6c9c6";
+                    notes.style.backgroundColor = "#c6c9c6";
+                    footer.style.backgroundColor = "#c6c9c6";
+                    settings.style.backgroundColor = "#e3e4e3";
+                }
+                // variabele voor popup note window
+                let popup_note = document.querySelector(".popup_note")
+
+                function open_n(){
+                    popup_note.style.display = "block";
+                    //reset value naar niks
+                    text.value = "";
+                    document.getElementById("texttitle").value = "";
+                }
+                function close_n(){
+                    popup_note.style.display = "none";
+                }
+                //local storage
+                /* links: https://dev.to/stevealila/3-typical-ways-to-store-data-using-javascript-1m1f 
+                https://www.w3schools.com/jsref/prop_win_localstorage.asp
+                https://www.w3schools.com/html/html5_webstorage.asp
+                and https://www.youtube.com/watch?v=Efo7nIUF2JY
+                */
+             
+                //variabele van add vak button
+                let add = document.getElementById("newnotebtn")
+                //vak id is niet geselecteerd/ in create on bclick krijgt hij de id van een vak
+                let vakid = null;
+                //eerst retrieve de stored data van local storage
+                function getVak(){
+                    //maak variabele van vak
+                    let vak;
+                    //als vak niet in local storage is dan maak array aan voor vak
+                    if (localStorage.getItem("vak") === null){
+                        vak = [];
+                    }
+                    //anders pak de value uit local storage met JSON.parse (alles in localstorage is in string dit herstelt het terug naar een array)
+                    else {
+                        vak = JSON.parse(localStorage.getItem("vak"));
+                    }
+                    return vak;
+                }
+                //save de vakken
+                function saveVak(vakkentoSave){
+                    //"val" van getVak() ,JSON.stringify maakt het weer een string
+                    localStorage.setItem("vak",JSON.stringify(vakkentoSave));
+                }
+                //variabele voor vak naam
+                let input = document.getElementById("newnote")
+
+                //functie om vak te creeeren en laten zien in website
+                function create(id,title,body){
+                    //variabele waar vakken gaan staan
+                    let vakkenlijst = document.getElementById("vakkenlijst-items");
+                    //maak een button
+                    const B = document.createElement("button");
+                    B.style.fontSize = "15px";
+                    //maak text 
+                    let vakText = document.createTextNode(title);
+                    //voeg tekst toe aan button
+                    B.appendChild(vakText);
+                    //voeg button toe aan vakkenlijst
+                    vakkenlijst.appendChild(B);
+                    
+                    B.onclick = function() {
+                        //onclick laat notes value veranderen
+                        document.getElementById("text").value = body;
+                        document.getElementById("texttitle").value = title;
+                        vakid = id;
+                        }
+                    //on dubbel click roep functie aan
+                    B.addEventListener("dblclick", function(){
+                        //confirm vraag
+                        let vw = confirm("Dit verwijdert de notitie");
+                        //if ja functie vwVak()
+                        if(vw){
+                        vwVak(id);
+                        //reset value naar niks
+                        text.value = "";
+                        document.getElementById("texttitle").value = "";
+                        }
+                    });
+                }
+                //functie om vakken te adden
+                function addVak(){
+                    const vakken = getVak()
+                    //variabelen voor één vak
+                    const vakkenObject = {
+                        //maak random id aan binnen de 1000
+                        id : Math.floor(Math.random() * 1000),
+                        title : input.value,
+                        body: text.value
+                    };
+                    //voeg de objecten toe aan de vakken array
+                    vakken.push(vakkenObject);
+                    saveVak(vakken);
+                    //reset value terug naar niks
+                    input.value= "";
+                    //create vak in website met de objecten
+                    create(vakkenObject.id,vakkenObject.title,vakkenObject.body)
+                }
+                //verwijder vak
+                function vwVak(id){
+                    let vakken = getVak();
+                    //houd alle vakken over behalve de vak.id die hetzelfde is als id die is geselecteerd
+                    let vak = vakken.filter(vak => vak.id !== id);
+                    // save de overgebleven vakken
+                    saveVak(vak);
+                    load();
+                }
+                
+                function load() {
+                    const vakken = getVak();
+                    const vakkenlijst = document.getElementById("vakkenlijst-items");
+                    //maak lijst leeg verkomt verdubbeling
+                    vakkenlijst.innerHTML = "";
+                    
+                    //voor elke vak in vakken maak knop aan
+                    for (let vak of vakken){
+                        create(vak.id, vak.title, vak.body)
+                    };
+                }
+                //variabele voor vak notities
+                let text = document.getElementById("text")
+                //als text word beschreven voer functie uit
+                text.addEventListener("input", function(){
+                    //als een vak is geselecteerd
+                    if (vakid !== null){
+                        const vakken = getVak();
+                        //vind de vak dat dezelfde id heeft als vakid
+                        const vak = vakken.find(vak => vak.id == vakid);
+                        if(vak){
+                            // update de body naar de nieuwe text
+                            vak.body = text.value;
+                            saveVak(vakken);
+                            load();
+                        }
+                    }
+                });
+                //on herlading voer functie uit
+                window.onload = load();
             </script>
-        </div>
-        <!--plaats voor notities-->
-        <div class="notes">
-            <h2>Notitie</h2>
-            <script>
-            </script>
-        </div>
-        <footer>
-            <div><p>© Copyright 2025 Norbu Tenzin</p></div>
-            <div><a href="https://github.com/N-Tenz/PO-JavaScript" style="font-size:25px;"><i class="fa fa-github"></i></a></div>
-        </footer>
-        <script>
-            //Variabelen aanmaken
-            //queryselector voor classes en elementen
-            //getElementById voor ids
-            let body = document.querySelector("body");
-            let aside1 = document.getElementById("a1");
-            let aside2 = document.getElementById("a2");
-            let header = document.querySelector("header");
-            let map = document.querySelector(".map");
-            let notes = document.querySelector(".notes");
-            let footer = document.querySelector("footer");
-            let setting = document.querySelector(".setting");
-            //functie verander de backgroundcolor naar blauw
-            function blue(){
-                body.style.backgroundColor = "#c4d0ff";
-                aside1.style.backgroundColor = "#c4d0ff";
-                aside2.style.backgroundColor = "#c4d0ff";
-                header.style.backgroundColor = "#90a1df";
-                map.style.backgroundColor = "#90a1df";
-                notes.style.backgroundColor = "#90a1df";
-                footer.style.backgroundColor = "#90a1df";
-                setting.style.backgroundColor = "#d9e1ff"
-            }
-            //functie verander de backgroundcolor naar rood
-            function red(){
-                body.style.backgroundColor = "#ffc2c2";
-                aside1.style.backgroundColor = "#ffc2c2";
-                aside2.style.backgroundColor = "#ffc2c2";
-                header.style.backgroundColor = "#ff9898";
-                map.style.backgroundColor = "#ff9898";
-                notes.style.backgroundColor = "#ff9898";
-                footer.style.backgroundColor = "#ff9898";
-                setting.style.backgroundColor = "#ffdede";
-            }
-            //functie verander de backgroundcolor naar grijs
-            function grey(){
-                body.style.backgroundColor = "#a2a7a1";
-                aside1.style.backgroundColor = "#a2a7a1";
-                aside2.style.backgroundColor = "#a2a7a1";
-                header.style.backgroundColor = "#c6c9c6";
-                map.style.backgroundColor = "#c6c9c6";
-                notes.style.backgroundColor = "#c6c9c6";
-                footer.style.backgroundColor = "#c6c9c6";
-                setting.style.backgroundColor = "#e3e4e3";
-            }
-        </script>
     </body>
 </html>
