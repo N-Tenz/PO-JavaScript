@@ -37,8 +37,7 @@
             <div class="map">
                 <div><h1>Vakken</h1>
                     <div id="vakkenlijst">
-                        <div id="vakkenlijst-items">
-                            
+                        <div id="vakkenlijst-items">    
                         </div>
                     </div>
                 </div>
@@ -52,8 +51,8 @@
             </div>
             <!--plaats voor notities-->
             <div class="notes">
-                <input class="text_title" id="texttitle" type="text" placeholder="Title">
-                <textarea class="text" id="text" type="text"></textarea>
+                <input class="text_title" id="texttitle" type="text" placeholder="Title...">
+                <textarea class="text" id="text" type="text" placeholder="text..."></textarea>
             </div>
             <footer>
                 <p>© Copyright 2024 Norbu Tenzin</p>
@@ -119,7 +118,11 @@
                     popup_note.style.display = "none";
                 }
                 //local storage
-                // links: https://dev.to/stevealila/3-typical-ways-to-store-data-using-javascript-1m1f https://www.w3schools.com/jsref/prop_win_localstorage.asp and https://www.w3schools.com/html/html5_webstorage.asp
+                /* links: https://dev.to/stevealila/3-typical-ways-to-store-data-using-javascript-1m1f 
+                https://www.w3schools.com/jsref/prop_win_localstorage.asp
+                https://www.w3schools.com/html/html5_webstorage.asp
+                and https://www.youtube.com/watch?v=Efo7nIUF2JY
+                */
                 //store data
                 //localStorage.setItem(key,value)
                 //remove data
@@ -133,7 +136,6 @@
                 //add vak button
                 let add = document.getElementById("newnotebtn")
                 
-
                 //first retrieve the earlier stored local storage
                 function getVak(){
                     let vak;
@@ -151,6 +153,27 @@
                 }
 
                 let input = document.getElementById("newnote")
+
+                function create(id,title,body){
+                    let vakkenlijst = document.getElementById("vakkenlijst-items");
+                    const B = document.createElement("button")
+                    let vakText = document.createTextNode(title);
+                    B.appendChild(vakText);
+                    vakkenlijst.appendChild(B);
+                    
+                    B.onclick = function() {
+                            document.getElementById("text").value = body;
+                            document.getElementById("texttitle").value = title;
+                            vakid = id;
+                        }
+
+                    B.addEventListener("dblclick", function(){
+                    let vw = confirm("Dit verwijdert de notitie");
+                    if(vw){
+                        vwVak(id);
+                    }
+                });
+                }
                 
                 function addVak(){
                     const vakken = getVak()
@@ -165,58 +188,43 @@
                     input.value= "";
                     console.log("Vak added:", vakkenObject);
                     
-                    load()
+                    create(vakkenObject.id,vakkenObject.title,vakkenObject.body)
                 }
-                function vwVak(id){
-                    const allevakken = getVak();
-                    const vakken = allevakken.filter(vak => vak.id != id);
 
-                    localStorage.setItem("vak",JSON.stringify(vakken));
+                function vwVak(id){
+                    let vakken = getVak();
+                    let vak = vakken.filter(vak => vak.id !== id);
+
+                    saveVak(vak);
+                    load();
                 }
                           
-                
-                        
+                let vakid = null;
                 
                 function load() {
                     const vakken = getVak();
                     const vakkenlijst = document.getElementById("vakkenlijst-items");
                     vakkenlijst.innerHTML = ""
-
                     
                     for (let vak of vakken){
-                        let vaktitle = document.createElement("button");
-                        let vakText = document.createTextNode(vak.title);
-                        vaktitle.appendChild(vakText);
-
-                        vaktitle.onclick = function() {
-                            document.getElementById("text").value = vak.body;
-                            document.getElementById("texttitle").value = vak.title;
-                        }
-                        
-                        vakkenlijst.appendChild(vaktitle);
+                        create(vak.id, vak.title, vak.body)
                     };
                 }
                 let text = document.getElementById("text")
 
-                /*text.addEventListener("input", function(){
-                    if 
-
-                })*/
-
-
-
-
-
-
-
-
-
-
-
+                text.addEventListener("input", function(){
+                    if (vakid !== null){
+                        const vakken = getVak();
+                        const vak = vakken.find(vak => vak.id == vakid);
+                        if(vak){
+                            vak.body = text.value;
+                            saveVak(vakken);
+                            load()
+                        }
+                    }
+                });
 
                 window.onload = load();
-
-
             </script>
     </body>
 </html>
