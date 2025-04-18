@@ -16,19 +16,17 @@
         <aside id="a2"></aside>
             <header>
                 <h1>Notes</h1>
-                <!--settings button icon van de link
-                onclick functie uitvoeren
-                size aan pas voor de groote-->
+                <!--settings button-->
                 <button id="set"  onclick="open_s()"><i class="material-icons" style="font-size:35px" >settings</i></button>
-
             </header>
             <div class="setting">
                 <!--div voor de content in de settings window-->
                 <div class="setting-content">
-                    <!--x icon / onclick voer functie uit-->
+                    <!--x icon-->
                     <button id="close" onclick="close_s()"><i class="material-icons" style="font-size:35px">close</i></button>
                     <h2>Settings</h2> <br>
                     <p> Backgroundcolor:</p><br>
+                    <!--background-color functies-->
                     <P><button id="blue" onclick="blue()">blue</button> 
                         <button id="red" onclick="red()">red</button> 
                         <button id="grey" onclick="grey()">grey</button></P>
@@ -42,12 +40,14 @@
                         </div>
                     </div>
                 </div>
-                <div style="margin-left:auto; margin-right:auto;"><button id="addbtn" onclick="open_n()" >Add Note</button></div>
+                <!--add note button-->
+                <div style="margin-left:auto; margin-right:auto;"><button id="addbtn" onclick="open_n()" >Add Vak</button></div>
             </div>
+            <!--popup bij add note-->
             <div class="popup_note">
-                <h2 style="float: left;">New Note</h2>
+                <h2 style="float: left;">New Vak</h2>
                 <button id="close_n" onclick="close_n()" ><i class="material-icons" style="font-size:35px">close</i></button><br>
-                <input id="newnote" type="text" placeholder="Note...">
+                <input id="newnote" type="text" placeholder="Vak...">
                 <button id="newnotebtn" onclick="addVak()">Add</button>
             </div>
             <!--plaats voor notities-->
@@ -56,10 +56,11 @@
                 <textarea class="text" id="text" type="text" placeholder="text..."></textarea>
             </div>
             <footer>
-                <p>© Copyright 2024 Norbu Tenzin</p>
+                <div><p>© Copyright 2024 Norbu Tenzin</p></div>
+                <div><a href="https://github.com/N-Tenz/PO-JavaScript" style="font-size:25px;"><i class="fa fa-github"></i></a></div>
             </footer>
             <script>
-                //maak variable van settings window door id te pakken
+                //maak variable van settings window
                 let settings = document.querySelector(".setting");
                     /*functie verandert display van none naar block
                     settings window verschijnt*/
@@ -70,7 +71,7 @@
                     function close_s(){
                         settings.style.display = "none";
                     }
-
+                //variabelen
                 let body = document.querySelector("body");
                 let aside1 = document.getElementById("a1");
                 let aside2 = document.getElementById("a2");
@@ -78,7 +79,7 @@
                 let map = document.querySelector(".map");
                 let notes = document.querySelector(".notes");
                 let footer = document.querySelector("footer");
-
+                // functie maakt background color blauw
                 function blue(){
                     body.style.backgroundColor = "#c4d0ff";
                     aside1.style.backgroundColor = "#c4d0ff";
@@ -89,6 +90,7 @@
                     footer.style.backgroundColor = "#90a1df";
                     settings.style.backgroundColor = "#d9e1ff"
                 }
+                // functie maakt background color rood
                 function red(){
                     body.style.backgroundColor = "#ffc2c2";
                     aside1.style.backgroundColor = "#ffc2c2";
@@ -99,6 +101,7 @@
                     footer.style.backgroundColor = "#ff9898";
                     settings.style.backgroundColor = "#ffdede";
                 }
+                // functie maakt background color grijs
                 function grey(){
                     body.style.backgroundColor = "#a2a7a1";
                     aside1.style.backgroundColor = "#a2a7a1";
@@ -109,11 +112,14 @@
                     footer.style.backgroundColor = "#c6c9c6";
                     settings.style.backgroundColor = "#e3e4e3";
                 }
-
+                // variabele voor popup note window
                 let popup_note = document.querySelector(".popup_note")
 
                 function open_n(){
                     popup_note.style.display = "block";
+                    //reset value naar niks
+                    text.value = "";
+                    document.getElementById("texttitle").value = "";
                 }
                 function close_n(){
                     popup_note.style.display = "none";
@@ -124,107 +130,123 @@
                 https://www.w3schools.com/html/html5_webstorage.asp
                 and https://www.youtube.com/watch?v=Efo7nIUF2JY
                 */
-                //store data
-                //localStorage.setItem(key,value)
-                //remove data
-                //localStorage.removeItem(key)
-                //retrieve earlier stored data
-                //localStorage.getItem(key)
-                //localStorage.setItem("Duits","vak is saai")
-                //laat vak zien in console
-                //console.log(localStorage.getItem("vak"))
              
-                //add vak button
+                //variabele van add vak button
                 let add = document.getElementById("newnotebtn")
-                
-                //first retrieve the earlier stored local storage
+                //vak id is niet geselecteerd/ in create on bclick krijgt hij de id van een vak
+                let vakid = null;
+                //eerst retrieve de stored data van local storage
                 function getVak(){
+                    //maak variabele van vak
                     let vak;
+                    //als vak niet in local storage is dan maak array aan voor vak
                     if (localStorage.getItem("vak") === null){
                         vak = [];
                     }
+                    //anders pak de value uit local storage met JSON.parse (alles in localstorage is in string dit herstelt het terug naar een array)
                     else {
                         vak = JSON.parse(localStorage.getItem("vak"));
                     }
                     return vak;
                 }
-                
+                //save de vakken
                 function saveVak(vakkentoSave){
+                    //"val" van getVak() ,JSON.stringify maakt het weer een string
                     localStorage.setItem("vak",JSON.stringify(vakkentoSave));
                 }
-
+                //variabele voor vak naam
                 let input = document.getElementById("newnote")
 
+                //functie om vak te creeeren en laten zien in website
                 function create(id,title,body){
+                    //variabele waar vakken gaan staan
                     let vakkenlijst = document.getElementById("vakkenlijst-items");
-                    const B = document.createElement("button")
+                    //maak een button
+                    const B = document.createElement("button");
+                    B.style.fontSize = "15px";
+                    //maak text 
                     let vakText = document.createTextNode(title);
+                    //voeg tekst toe aan button
                     B.appendChild(vakText);
+                    //voeg button toe aan vakkenlijst
                     vakkenlijst.appendChild(B);
                     
                     B.onclick = function() {
-                            document.getElementById("text").value = body;
-                            document.getElementById("texttitle").value = title;
-                            vakid = id;
+                        //onclick laat notes value veranderen
+                        document.getElementById("text").value = body;
+                        document.getElementById("texttitle").value = title;
+                        vakid = id;
                         }
-
+                    //on dubbel click roep functie aan
                     B.addEventListener("dblclick", function(){
-                    let vw = confirm("Dit verwijdert de notitie");
-                    if(vw){
+                        //confirm vraag
+                        let vw = confirm("Dit verwijdert de notitie");
+                        //if ja functie vwVak()
+                        if(vw){
                         vwVak(id);
-                    }
-                });
+                        //reset value naar niks
+                        text.value = "";
+                        document.getElementById("texttitle").value = "";
+                        }
+                    });
                 }
-                
+                //functie om vakken te adden
                 function addVak(){
                     const vakken = getVak()
+                    //variabelen voor één vak
                     const vakkenObject = {
-                        id : Math.floor(Math.random() * 100000),
+                        //maak random id aan binnen de 1000
+                        id : Math.floor(Math.random() * 1000),
                         title : input.value,
                         body: text.value
                     };
+                    //voeg de objecten toe aan de vakken array
                     vakken.push(vakkenObject);
                     saveVak(vakken);
-
+                    //reset value terug naar niks
                     input.value= "";
-                    console.log("Vak added:", vakkenObject);
-                    
+                    //create vak in website met de objecten
                     create(vakkenObject.id,vakkenObject.title,vakkenObject.body)
                 }
-
+                //verwijder vak
                 function vwVak(id){
                     let vakken = getVak();
+                    //houd alle vakken over behalve de vak.id die hetzelfde is als id die is geselecteerd
                     let vak = vakken.filter(vak => vak.id !== id);
-
+                    // save de overgebleven vakken
                     saveVak(vak);
                     load();
                 }
-                          
-                let vakid = null;
                 
                 function load() {
                     const vakken = getVak();
                     const vakkenlijst = document.getElementById("vakkenlijst-items");
-                    vakkenlijst.innerHTML = ""
+                    //maak lijst leeg verkomt verdubbeling
+                    vakkenlijst.innerHTML = "";
                     
+                    //voor elke vak in vakken maak knop aan
                     for (let vak of vakken){
                         create(vak.id, vak.title, vak.body)
                     };
                 }
+                //variabele voor vak notities
                 let text = document.getElementById("text")
-
+                //als text word beschreven voer functie uit
                 text.addEventListener("input", function(){
+                    //als een vak is geselecteerd
                     if (vakid !== null){
                         const vakken = getVak();
+                        //vind de vak dat dezelfde id heeft als vakid
                         const vak = vakken.find(vak => vak.id == vakid);
                         if(vak){
+                            // update de body naar de nieuwe text
                             vak.body = text.value;
                             saveVak(vakken);
-                            load()
+                            load();
                         }
                     }
                 });
-
+                //on herlading voer functie uit
                 window.onload = load();
             </script>
     </body>
