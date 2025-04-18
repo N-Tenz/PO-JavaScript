@@ -10,6 +10,9 @@ body{
     row-gap: 0px;
     height: 100vh;
 }
+button:hover{
+    cursor: pointer;
+}
 #a1 {
     grid-area: aside1;
     grid-row: 1/ span 3;
@@ -48,13 +51,14 @@ header button:hover{
 }
 .setting{
     display: none;
-    position: relative;
+    position: fixed;
     z-index: 1;
-    margin-top: 10%;
-    margin-left: auto;
-    margin-right: auto;
+    top: 50%;
+    left: 50%;
+    margin-top: -100px;
+    margin-left: -250px;
     width: 500px;
-    height: 400px;
+    height: 200px;
     border: 2px solid black;
     border-radius: 30px;
     background-color: #d9e1ff;
@@ -64,7 +68,7 @@ header button:hover{
     font-size: 20px;
 }
 .setting-content h2,p{
-margin: 0px 0px 0px 20px;
+    margin: 0px 0px 0px 20px;
 }
 #close{
     float: right;
@@ -101,14 +105,41 @@ margin: 0px 0px 0px 20px;
     flex-direction: column;
     justify-content: space-between;
 }
-#vakin{
-    padding: 5px;
+#addbtn{
+    background-color: #d9e1ff;
+    font-size: 25px;
+    border-radius: 10px;
+    height: 50px;
+    width: auto;
 }
-#vakin button{
-    border: 1px solid;
-    background-color: white;
-    height: 25px;
-    width: 25px;
+.popup_note{
+    display: none;
+    top: 50%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -125px;
+    position: fixed;
+    z-index: 1;
+    background-color: #d9e1ff;
+    width: 250px;
+    height: 100px;
+    padding: 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+#newnote{
+    font-size: 15px;
+    float: left;
+}
+#close_n{
+    font-size: 15px;
+    background-color: transparent;
+    border: none;
+    float:right;
+}
+#newnotebtn{
+    font-size: 15px;
+    float: right;
 }
 .notes {
     grid-area: notes;
